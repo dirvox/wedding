@@ -1,4 +1,6 @@
 import React, { useState, useEffect, useRef, useMemo } from 'react';
+import { GateHero } from './GateHero';
+import { GaneshaHeader } from './GaneshaHeader';
 
 // ==========================================
 // UTILS & HOOKS
@@ -73,128 +75,390 @@ function Navbar({ isMenuOpen, setIsMenuOpen }) {
   );
 }
 
-function GateHero({ gateOpen, setGateOpen, timeLeft }) {
-  return (
-    <section id="home" className="hero">
-      <div className="hero-backdrop" />
+// function GateHero({ gateOpen, setGateOpen, timeLeft }) {
+//   return (
+//     <section id="home" className="hero">
+//       <div className="hero-backdrop" />
 
-      {/* Decorative Top Toran/Garland */}
-      <div className="hero-toran">
-        {[...Array(12)].map((_, i) => (
-          <span key={i} className="toran-flower">🌼</span>
-        ))}
-      </div>
+//       {/* Decorative Top Toran/Garland */}
+//       <div className="hero-toran">
+//         {[...Array(12)].map((_, i) => (
+//           <span key={i} className="toran-flower">🌼</span>
+//         ))}
+//       </div>
 
-      {/* Left Gate Panel */}
-      <div className={`gate-panel gate-left ${gateOpen ? 'open' : ''}`}>
-        <div className="gate-jali" />
-        <div className="gate-border-detail" />
-        <div className="gate-emblem-wrapper">
-          <div className="gate-emblem">🕉️</div>
-          <div className="diya-glow">🪔</div>
-        </div>
-      </div>
+//       {/* Left Gate Panel */}
+//       <div className={`gate-panel gate-left ${gateOpen ? 'open' : ''}`}>
+//         <div className="gate-jali" />
+//         <div className="gate-border-detail" />
+//         <div className="gate-emblem-wrapper">
+//           <div className="gate-emblem">🕉️</div>
+//           <div className="diya-glow">🪔</div>
+//         </div>
+//       </div>
 
-      {/* Right Gate Panel */}
-      <div className={`gate-panel gate-right ${gateOpen ? 'open' : ''}`}>
-        <div className="gate-jali" />
-        <div className="gate-border-detail" />
-        <div className="gate-emblem-wrapper">
-          <div className="gate-emblem">🪔</div>
-          <div className="diya-glow">✨</div>
-        </div>
-      </div>
+//       {/* Right Gate Panel */}
+//       <div className={`gate-panel gate-right ${gateOpen ? 'open' : ''}`}>
+//         <div className="gate-jali" />
+//         <div className="gate-border-detail" />
+//         <div className="gate-emblem-wrapper">
+//           <div className="gate-emblem">🪔</div>
+//           <div className="diya-glow">✨</div>
+//         </div>
+//       </div>
 
-      {/* Call To Action Button (Central Seal) */}
-      <div className={`gate-cta ${gateOpen ? 'hidden' : ''}`}>
-        <div className="gate-cta-badge">Shubh Vivah</div>
-        <div className="gate-cta-names">Rohan & Priya</div>
-        <div
-          className="gate-cta-ring"
-          onClick={() => setGateOpen(true)}
-          role="button"
-          tabIndex={0}
-          onKeyDown={(e) => { if (e.key === 'Enter') setGateOpen(true); }}
-          aria-label="Open the invitation"
-        >
-          <div className="ring-pulse" />
-          <svg className="svg-icon" viewBox="0 0 24 24" style={{ width: 32, height: 32, fill: '#E8C766' }}>
-            <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm1 13.5l-4-4 1.41-1.41L13 13.67l3.59-3.59L18 11.5l-5 5z" />
-          </svg>
-        </div>
-        <div className="gate-cta-text">Tap the Royal Seal to Open</div>
-      </div>
+//       {/* Call To Action Button (Central Seal) */}
+//       <div className={`gate-cta ${gateOpen ? 'hidden' : ''}`}>
+//         <div className="gate-cta-badge">Shubh Vivah</div>
+//         <div className="gate-cta-names">Rohan & Priya</div>
+//         <div
+//           className="gate-cta-ring"
+//           onClick={() => setGateOpen(true)}
+//           role="button"
+//           tabIndex={0}
+//           onKeyDown={(e) => { if (e.key === 'Enter') setGateOpen(true); }}
+//           aria-label="Open the invitation"
+//         >
+//           <div className="ring-pulse" />
+//           <svg className="svg-icon" viewBox="0 0 24 24" style={{ width: 32, height: 32, fill: '#E8C766' }}>
+//             <path d="M12 3C7.03 3 3 7.03 3 12s4.03 9 9 9 9-4.03 9-9-4.03-9-9-9zm1 13.5l-4-4 1.41-1.41L13 13.67l3.59-3.59L18 11.5l-5 5z" />
+//           </svg>
+//         </div>
+//         <div className="gate-cta-text">Tap the Royal Seal to Open</div>
+//       </div>
 
-      {/* Revealed Hero Content */}
-      <div className={`hero-content ${gateOpen ? 'revealed' : ''}`}>
-        <h3 className="hero-eyebrow">✦ Shubh Vivah · Save the Date ✦</h3>
-        <h1 className="hero-title display-font">
-          Rohan <span className="hero-amp accent-font">&</span> Priya
-        </h1>
-        <p className="hero-sub">Together with their families, request the pleasure of your company</p>
+//       {/* Revealed Hero Content */}
+//       <div className={`hero-content ${gateOpen ? 'revealed' : ''}`}>
+//         <h3 className="hero-eyebrow">✦ Shubh Vivah · Save the Date ✦</h3>
+//         <h1 className="hero-title display-font">
+//           Rohan <span className="hero-amp accent-font">&</span> Priya
+//         </h1>
+//         <p className="hero-sub">Together with their families, request the pleasure of your company</p>
 
-        <div className="countdown-container">
-          <div className="countdown-box"><div className="countdown-num">{timeLeft.days}</div><small>Days</small></div>
-          <div className="countdown-box"><div className="countdown-num">{timeLeft.hours}</div><small>Hrs</small></div>
-          <div className="countdown-box"><div className="countdown-num">{timeLeft.minutes}</div><small>Mins</small></div>
-          <div className="countdown-box"><div className="countdown-num">{timeLeft.seconds}</div><small>Secs</small></div>
-        </div>
+//         <div className="countdown-container">
+//           <div className="countdown-box"><div className="countdown-num">{timeLeft.days}</div><small>Days</small></div>
+//           <div className="countdown-box"><div className="countdown-num">{timeLeft.hours}</div><small>Hrs</small></div>
+//           <div className="countdown-box"><div className="countdown-num">{timeLeft.minutes}</div><small>Mins</small></div>
+//           <div className="countdown-box"><div className="countdown-num">{timeLeft.seconds}</div><small>Secs</small></div>
+//         </div>
 
-        <a href="#events" className="btn btn-gold">View Itinerary & Scratch Date</a>
-      </div>
-    </section>
-  );
-}
+//         <a href="#events" className="btn btn-gold">View Itinerary & Scratch Date</a>
+//       </div>
+//     </section>
+//   );
+// }
 
-function GaneshaHeader({ rsvpRef, rsvpVisible }) {
-  return (
-    <section id="rsvp" ref={rsvpRef} className={`section reveal ${rsvpVisible ? 'visible' : ''}`}>
-      <p className="ganesha-mantra">॥ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ॥</p>
-      <p className="ganesha-mantra" style={{ fontSize: '1.05rem', fontStyle: 'italic', marginBottom: '1.5rem' }}>
-        ॥ निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥
-      </p>
-      <img
-        src="/shree-ganesh.png"
-        alt="Lord Ganesha"
-        onError={(e) => { e.target.style.display = 'none'; }}
-        style={{
-          width: "100%",
-          maxWidth: "220px",
-          height: "auto",
-          display: "block",
-          margin: "0 auto",
-          objectFit: "contain",
-          filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.1))"
-        }}
-      />
-    </section>
-  );
-}
-
+// function GaneshaHeader({ rsvpRef, rsvpVisible }) {
+//   return (
+//     <section id="rsvp" ref={rsvpRef} className={`section reveal ${rsvpVisible ? 'visible' : ''}`}>
+//       <p className="ganesha-mantra">॥ वक्रतुण्ड महाकाय सूर्यकोटि समप्रभ ॥</p>
+//       <p className="ganesha-mantra" style={{ fontSize: '1.05rem', fontStyle: 'italic', marginBottom: '1.5rem' }}>
+//         ॥ निर्विघ्नं कुरु मे देव सर्वकार्येषु सर्वदा ॥
+//       </p>
+//       <img
+//         src="/shree-ganesh.png"
+//         alt="Lord Ganesha"
+//         onError={(e) => { e.target.style.display = 'none'; }}
+//         style={{
+//           width: "100%",
+//           maxWidth: "220px",
+//           height: "auto",
+//           display: "block",
+//           margin: "0 auto",
+//           objectFit: "contain",
+//           filter: "drop-shadow(0 4px 10px rgba(0,0,0,0.1))"
+//         }}
+//       />
+//     </section>
+//   );
+// }
 function OurStory({ storyRef, storyVisible }) {
+  const styles = `
+    /* --- Main Wrapper & Ambient Maroon Background --- */
+    .story-wrapper {
+      position: relative;
+      padding: 120px 20px;
+      /* Deep, rich luxurious maroon background */
+      background: radial-gradient(circle at center, #3A0C16 0%, #1A0408 100%);
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      font-family: 'Inter', sans-serif;
+    }
+
+    /* Moody glowing orbs in the background */
+    .bg-orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(90px);
+      z-index: 0;
+    }
+    .orb-1 { 
+      top: -10%; left: -5%; 
+      width: 400px; height: 400px; 
+      background: rgba(212, 175, 55, 0.12); /* Soft gold glow */
+    }
+    .orb-2 { 
+      bottom: -10%; right: -5%; 
+      width: 500px; height: 500px; 
+      background: rgba(184, 29, 61, 0.15); /* Bright ruby/maroon glow */
+    }
+
+    /* --- Container & Layout --- */
+    .story-container {
+      max-width: 1100px;
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      display: flex;
+      align-items: center;
+      gap: 80px;
+    }
+
+    .text-column {
+      flex: 1;
+      text-align: left;
+    }
+
+    .image-column {
+      flex: 1;
+      position: relative;
+      display: flex;
+      justify-content: center;
+    }
+
+    /* --- Typography & Text Animations --- */
+    .reveal-text {
+      opacity: 0;
+      transform: translateY(30px);
+      filter: blur(5px);
+      transition: all 1s cubic-bezier(0.2, 0.8, 0.2, 1);
+    }
+    
+    .is-visible .reveal-text {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    .delay-1 { transition-delay: 0.1s; }
+    .delay-2 { transition-delay: 0.2s; }
+    .delay-3 { transition-delay: 0.4s; }
+    .delay-4 { transition-delay: 0.6s; }
+
+    .eyebrow {
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 4px;
+      color: #d4af37; /* Bright classic gold */
+      font-weight: 700;
+      margin-bottom: 15px;
+      display: block;
+    }
+
+    .title {
+      font-size: 3.5rem;
+      color: #fdfdfd; /* Crisp white */
+      margin-bottom: 30px;
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.1;
+    }
+
+    /* Unique Quote Box */
+    .quote-box {
+      position: relative;
+      padding-left: 25px;
+      margin-bottom: 30px;
+    }
+    
+    .quote-box::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 3px;
+      background: linear-gradient(to bottom, #d4af37, transparent);
+      border-radius: 3px;
+    }
+
+    .story-quote {
+      font-style: italic;
+      font-size: 1.6rem;
+      color: #f4ece4; /* Soft warm cream */
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.4;
+    }
+
+    .story-text {
+      font-size: 1.05rem;
+      line-height: 1.8;
+      color: #d9c9ba; /* Muted cream/beige for high readability against maroon */
+      max-width: 450px;
+    }
+
+    /* --- Image Styling (The Unique Arched Window) --- */
+    .arch-frame-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+      opacity: 0;
+      transform: scale(0.9) translateY(40px);
+      transition: all 1.2s cubic-bezier(0.2, 0.8, 0.2, 1) 0.3s;
+    }
+
+    .is-visible .arch-frame-wrapper {
+      opacity: 1;
+      transform: scale(1) translateY(0);
+      animation: float-gentle 6s ease-in-out infinite alternate 1.5s;
+    }
+
+    /* Golden accent ring behind the image */
+    .arch-accent {
+      position: absolute;
+      top: 20px;
+      left: -20px;
+      width: 100%;
+      height: 100%;
+      border: 2px solid rgba(212, 175, 55, 0.5); /* Semi-transparent gold border */
+      border-radius: 200px 200px 15px 15px;
+      z-index: -1;
+      transition: all 1s ease;
+    }
+
+    .arch-image {
+      width: 100%;
+      height: 500px;
+      object-fit: cover;
+      border-radius: 200px 200px 15px 15px;
+      box-shadow: 0 30px 60px rgba(10, 2, 4, 0.7); /* Deep dark maroon shadow for depth */
+      transition: transform 0.5s ease;
+      filter: brightness(0.9) contrast(1.05); /* Slightly enhances the wedding feel */
+    }
+
+    /* Hover Interaction */
+    .arch-frame-wrapper:hover .arch-image {
+      transform: translateY(-10px);
+      filter: brightness(1.05) contrast(1.05);
+    }
+    .arch-frame-wrapper:hover .arch-accent {
+      top: 30px;
+      left: -30px;
+      border-color: rgba(212, 175, 55, 1); /* Full gold on hover */
+    }
+
+    @keyframes float-gentle {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-15px); }
+    }
+
+    /* Floating flower element */
+    .floating-flower {
+      position: absolute;
+      right: -20px;
+      bottom: 40px;
+      font-size: 3rem;
+      filter: drop-shadow(0 10px 10px rgba(0,0,0,0.4));
+      opacity: 0;
+      transform: scale(0) rotate(-45deg);
+      transition: all 1s cubic-bezier(0.34, 1.56, 0.64, 1) 1s;
+    }
+
+    .is-visible .floating-flower {
+      opacity: 1;
+      transform: scale(1) rotate(15deg);
+      animation: sway 4s ease-in-out infinite alternate 2s;
+    }
+
+    @keyframes sway {
+      0% { transform: scale(1) rotate(15deg); }
+      100% { transform: scale(1) rotate(-5deg); }
+    }
+
+    /* --- Responsive Design --- */
+    @media (max-width: 900px) {
+      .story-container {
+        flex-direction: column;
+        gap: 60px;
+        text-align: center;
+      }
+      .text-column {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .title { font-size: 2.8rem; }
+      .quote-box {
+        padding-left: 0;
+        padding-top: 20px;
+      }
+      .quote-box::before {
+        width: 50px;
+        height: 3px;
+        top: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        background: linear-gradient(to right, transparent, #d4af37, transparent);
+      }
+      .story-text { max-width: 100%; }
+      .arch-image { height: 400px; }
+      .arch-accent { left: 15px; top: 15px; }
+      .arch-frame-wrapper:hover .arch-accent { left: 20px; top: 20px; }
+    }
+  `;
+
   return (
-    <section id="story" ref={storyRef} className={`section reveal ${storyVisible ? 'visible' : ''}`}>
-      <p className="section-eyebrow">The Beginning</p>
-      <h2 className="section-title">Our Story</h2>
-      <div className="section-divider"><span className="line" /> <span className="spin-icon">🌸</span> <span className="line" /></div>
-      <div className="story-card">
-        <p className="story-quote">"Every love story is beautiful, but ours is our favourite."</p>
-        <p className="story-text">
-          Hum mile, dost bane, pyaar hua, aur ab shuru ho rahi hai hamari sabse khoobsurat kahani — humesha ke liye.
-          Join us as we step into this new chapter, surrounded by the people we love most.
-        </p>
-        <img
-          className="story-img"
-          src="/wedding-image.png"
-          alt="Couple"
-          onError={(e) => { e.target.src = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600"; }}
-        />
-      </div>
-    </section>
+    <>
+      <style>{styles}</style>
+
+      <section 
+        id="story" 
+        ref={storyRef} 
+        className={`story-wrapper ${storyVisible ? 'is-visible' : ''}`}
+      >
+        {/* Ambient Glowing Orbs */}
+        <div className="bg-orb orb-1"></div>
+        <div className="bg-orb orb-2"></div>
+
+        <div className="story-container">
+          
+          {/* Left Side: Typography */}
+          <div className="text-column">
+            <span className="eyebrow reveal-text delay-1">The Beginning</span>
+            <h2 className="title reveal-text delay-2">Our Story</h2>
+            
+            <div className="quote-box reveal-text delay-3">
+              <p className="story-quote">"Every love story is beautiful, but ours is our favourite."</p>
+            </div>
+            
+            <p className="story-text reveal-text delay-4">
+              Hum mile, dost bane, pyaar hua, aur ab shuru ho rahi hai hamari sabse khoobsurat kahani — humesha ke liye. 
+              <br/><br/>
+              Join us as we step into this new chapter, surrounded by the people we love most.
+            </p>
+          </div>
+
+          {/* Right Side: Unique Arched Image Layout */}
+          <div className="image-column">
+            <div className="arch-frame-wrapper">
+              <div className="arch-accent"></div>
+              <img
+                className="arch-image"
+                src="/wedding-image.png"
+                alt="Couple"
+                onError={(e) => { 
+                  e.target.src = "https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&q=80&w=600"; 
+                }}
+              />
+              <div className="floating-flower">🌸</div>
+            </div>
+          </div>
+
+        </div>
+      </section>
+    </>
   );
 }
-
-
 
 
 
@@ -267,7 +531,7 @@ function HeartScratchCard({
 }
 
 // Main WeddingEvents Component (Fixed Props Destructuring)
- function WeddingEvents({
+function WeddingEvents({
   eventsRef,
   eventsVisible,
   dateRevealed,
@@ -282,45 +546,128 @@ function HeartScratchCard({
       className={`section events-section reveal ${eventsVisible ? "visible" : ""}`}
     >
       <style>{`
+        /* Deep Dark Maroon & Gold Theme Background */
         .events-section {
-          background: linear-gradient(180deg, rgba(107,30,60,0.02) 0%, rgba(201,162,39,0.05) 50%, rgba(107,30,60,0.02) 100%);
-          padding: 80px 20px;
+          background: radial-gradient(circle at top center, #4A1428 0%, #1A050E 100%);
+          padding: 100px 20px;
           position: relative;
           overflow: hidden;
+          color: #Fdfbf7;
         }
 
+        /* Subtle glowing background orbs */
+        .events-section::before {
+          content: '';
+          position: absolute;
+          top: -10%;
+          left: -10%;
+          width: 50%;
+          height: 50%;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+          filter: blur(40px);
+          animation: floatOrb 8s infinite alternate ease-in-out;
+        }
+        
+        .events-section::after {
+          content: '';
+          position: absolute;
+          bottom: -10%;
+          right: -10%;
+          width: 60%;
+          height: 60%;
+          background: radial-gradient(circle, rgba(107, 30, 60, 0.2) 0%, transparent 70%);
+          filter: blur(60px);
+          animation: floatOrb 10s infinite alternate-reverse ease-in-out;
+        }
+
+        @keyframes floatOrb {
+          0% { transform: translate(0, 0) scale(1); }
+          100% { transform: translate(30px, 30px) scale(1.1); }
+        }
+
+        /* Titles and Headers */
+        .events-section .section-eyebrow {
+          color: #D4AF37; /* Metallic Gold */
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          letter-spacing: 4px;
+          text-align: center;
+          margin-bottom: 10px;
+          font-weight: 600;
+        }
+
+        .events-section .section-title {
+          color: #F8E58C;
+          font-size: 3rem;
+          text-align: center;
+          margin-bottom: 15px;
+          font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+          text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .section-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 15px;
+          margin-bottom: 50px;
+        }
+
+        .section-divider .line {
+          height: 1px;
+          width: 80px;
+          background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        }
+
+        .section-divider .spin-icon {
+          font-size: 1.5rem;
+          animation: gentleSpin 4s linear infinite;
+        }
+
+        @keyframes gentleSpin {
+          0% { transform: rotate(-10deg) scale(1); }
+          50% { transform: rotate(10deg) scale(1.1); }
+          100% { transform: rotate(-10deg) scale(1); }
+        }
+
+        /* Scratch Card Wrappers */
         .scratch-card-wrapper {
           display: flex;
           flex-direction: column;
           align-items: center;
           margin: 1.5rem auto 3.5rem;
           max-width: 500px;
+          position: relative;
+          z-index: 10;
         }
 
         .scratch-badge {
-          background: rgba(201,162,39,0.12);
-          color: #8A6A12;
-          font-size: 0.75rem;
+          background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), rgba(212, 175, 55, 0.05));
+          color: #F8E58C;
+          font-size: 0.8rem;
           font-weight: 600;
           letter-spacing: 2px;
           text-transform: uppercase;
-          padding: 5px 16px;
-          border-radius: 20px;
-          border: 1px solid rgba(201,162,39,0.3);
+          padding: 6px 20px;
+          border-radius: 30px;
+          border: 1px solid rgba(212, 175, 55, 0.5);
           display: inline-block;
-          margin-bottom: 8px;
+          margin-bottom: 15px;
+          box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
         }
 
         .scratch-title {
-          color: var(--maroon-dark, #4A1428);
+          color: #F8E58C;
           font-size: 2.2rem;
           margin-bottom: 6px;
+          font-family: 'Cormorant Garamond', serif;
         }
 
         .scratch-subtitle {
-          color: #666;
-          font-size: 0.95rem;
-          margin-bottom: 24px;
+          color: #D4AF37;
+          font-size: 1rem;
+          margin-bottom: 30px;
+          opacity: 0.8;
         }
 
         .heart-card-container {
@@ -332,15 +679,15 @@ function HeartScratchCard({
 
         .heart-glow {
           position: absolute;
-          inset: 20px;
-          background: radial-gradient(circle, rgba(232,199,102,0.4) 0%, rgba(107,30,60,0) 70%);
-          filter: blur(15px);
+          inset: 10px;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.6) 0%, transparent 70%);
+          filter: blur(20px);
           animation: glowPulse 3s ease-in-out infinite alternate;
         }
 
         @keyframes glowPulse {
-          0% { transform: scale(0.95); opacity: 0.6; }
-          100% { transform: scale(1.1); opacity: 0.9; }
+          0% { transform: scale(0.9); opacity: 0.5; }
+          100% { transform: scale(1.15); opacity: 0.9; }
         }
 
         .heart-reveal-content {
@@ -352,10 +699,11 @@ function HeartScratchCard({
           z-index: 1;
         }
 
+        /* Updated Reveal BG for Dark Theme */
         .heart-reveal-bg {
           width: 300px;
           height: 270px;
-          background: linear-gradient(135deg, #FFFDF9 0%, #FFF2DF 100%);
+          background: linear-gradient(135deg, #2A0813 0%, #1A050E 100%);
           clip-path: path('M 150, 260 C 150, 260 15, 160 15, 85 C 15, 20 80, 10 150, 65 C 220, 10 285, 20 285, 85 C 285, 160 150, 260 150, 260 Z');
           display: flex;
           flex-direction: column;
@@ -363,7 +711,7 @@ function HeartScratchCard({
           justify-content: center;
           padding: 25px;
           text-align: center;
-          box-shadow: inset 0 0 20px rgba(201,162,39,0.2);
+          box-shadow: inset 0 0 30px rgba(212, 175, 55, 0.4);
           position: relative;
         }
 
@@ -371,15 +719,15 @@ function HeartScratchCard({
           position: absolute;
           inset: 8px;
           clip-path: path('M 142, 245 C 142, 245 22, 152 22, 82 C 22, 25 78, 18 142, 65 C 206, 18 262, 25 262, 82 C 262, 152 142, 245 142, 245 Z');
-          border: 1px dashed rgba(201,162,39,0.5);
+          border: 1px dashed rgba(212, 175, 55, 0.8);
           pointer-events: none;
         }
 
-        .reveal-ring-emoji { font-size: 2.4rem; margin-bottom: 2px; }
-        .reveal-date { font-size: 1.45rem; color: #6B1E3C; margin: 4px 0; font-weight: 600; }
-        .reveal-divider { width: 40px; height: 1px; background: #C9A227; margin: 6px 0; opacity: 0.6; }
-        .reveal-time { font-size: 0.85rem; color: #4A1428; font-weight: 600; }
-        .reveal-location { font-size: 0.8rem; color: #666; }
+        .reveal-ring-emoji { font-size: 2.6rem; margin-bottom: 2px; filter: drop-shadow(0 0 10px rgba(255,255,255,0.3)); }
+        .reveal-date { font-size: 1.5rem; color: #F8E58C; margin: 4px 0; font-weight: 600; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .reveal-divider { width: 50px; height: 1px; background: #D4AF37; margin: 8px 0; box-shadow: 0 0 5px #D4AF37; }
+        .reveal-time { font-size: 0.9rem; color: #D4AF37; font-weight: 600; letter-spacing: 1px; }
+        .reveal-location { font-size: 0.85rem; color: #E0E0E0; margin-top: 4px;}
 
         .scratch-canvas {
           position: absolute;
@@ -396,20 +744,28 @@ function HeartScratchCard({
         }
 
         .scratch-progress-bar-wrap {
-          margin-top: 18px;
-          width: 220px;
-          height: 22px;
-          background: rgba(0,0,0,0.05);
-          border-radius: 12px;
+          margin-top: 25px;
+          width: 240px;
+          height: 18px;
+          background: rgba(0, 0, 0, 0.4);
+          border-radius: 20px;
           position: relative;
           overflow: hidden;
-          border: 1px solid rgba(201,162,39,0.3);
+          border: 1px solid rgba(212, 175, 55, 0.4);
+          box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);
         }
 
         .scratch-progress-fill {
           height: 100%;
-          background: linear-gradient(90deg, #C9A227, #E8C766);
-          transition: width 0.2s ease;
+          background: linear-gradient(90deg, #B8860B, #FFD700, #F8E58C);
+          background-size: 200% 100%;
+          animation: gradientShift 2s linear infinite;
+          transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        @keyframes gradientShift {
+          0% { background-position: 100% 0; }
+          100% { background-position: -100% 0; }
         }
 
         .scratch-progress-text {
@@ -418,140 +774,188 @@ function HeartScratchCard({
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.72rem;
-          font-weight: 600;
-          color: #4A1428;
+          font-size: 0.75rem;
+          font-weight: 700;
+          color: #1A050E;
+          text-shadow: 0 1px 2px rgba(255,255,255,0.5);
         }
 
         .revealed-success-badge {
-          margin-top: 16px;
-          color: #6B1E3C;
+          margin-top: 20px;
+          color: #F8E58C;
           font-weight: 600;
-          font-size: 0.95rem;
-          animation: fadeIn 0.8s ease;
+          font-size: 1.1rem;
+          letter-spacing: 1px;
+          animation: fadeInDown 0.8s ease forwards;
+          text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
         }
 
+        @keyframes fadeInDown {
+          from { opacity: 0; transform: translateY(-10px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 🌟 Event Grid & Luxury Cards 🌟 */
         .events-grid {
           display: grid;
           grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-          gap: 2rem;
-          max-width: 1000px;
-          margin: 3rem auto 0;
-          padding: 0 10px;
+          gap: 2.5rem;
+          max-width: 1100px;
+          margin: 4rem auto 0;
+          padding: 0 15px;
+          position: relative;
+          z-index: 10;
         }
 
         .event-card-large {
-          background: rgba(255, 255, 255, 0.9);
-          backdrop-filter: blur(10px);
-          border-radius: 16px;
-          border: 1px solid rgba(201, 162, 39, 0.25);
-          box-shadow: 0 12px 30px rgba(74, 20, 40, 0.06);
-          padding: 2rem 1.8rem;
+          background: rgba(35, 10, 18, 0.6); /* Dark Glassmorphism */
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-radius: 20px;
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.05);
+          padding: 2.5rem 2rem;
           text-align: left;
           position: relative;
           overflow: hidden;
-          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          transition: all 0.4s cubic-bezier(0.25, 0.8, 0.25, 1);
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          opacity: 0;
         }
 
+        /* Golden Top Border */
         .event-card-large::before {
           content: '';
           position: absolute;
           top: 0;
           left: 0;
           width: 100%;
-          height: 4px;
-          background: linear-gradient(90deg, #C9A227, #E8C766, #6B1E3C);
+          height: 5px;
+          background: linear-gradient(90deg, #D4AF37, #FFF8D6, #D4AF37);
+          box-shadow: 0 0 15px rgba(212, 175, 55, 0.8);
         }
 
         .event-card-large:hover {
-          transform: translateY(-8px);
-          box-shadow: 0 20px 40px rgba(74, 20, 40, 0.12);
-          border-color: rgba(201, 162, 39, 0.6);
+          transform: translateY(-12px) scale(1.02);
+          box-shadow: 0 25px 50px rgba(0, 0, 0, 0.6), 0 0 40px rgba(212, 175, 55, 0.25);
+          border-color: rgba(212, 175, 55, 0.8);
+          background: rgba(45, 13, 23, 0.75);
         }
 
         .card-top-header {
           display: flex;
           justify-content: space-between;
-          align-items: flex-start;
-          margin-bottom: 1.2rem;
+          align-items: center;
+          margin-bottom: 1.5rem;
         }
 
         .card-emoji-badge {
-          width: 56px;
-          height: 56px;
+          width: 60px;
+          height: 60px;
           border-radius: 50%;
-          background: linear-gradient(135deg, #FFF9F2, #F3D9DA);
-          border: 1px solid rgba(201, 162, 39, 0.3);
+          background: linear-gradient(135deg, rgba(212, 175, 55, 0.2), transparent);
+          border: 1px solid rgba(212, 175, 55, 0.6);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 1.8rem;
-          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+          font-size: 2rem;
+          box-shadow: inset 0 0 15px rgba(212,175,55,0.2), 0 4px 15px rgba(0,0,0,0.3);
+          transition: transform 0.3s ease;
+        }
+
+        .event-card-large:hover .card-emoji-badge {
+          transform: rotate(10deg) scale(1.1);
         }
 
         .card-hindi-title {
           font-family: 'Cormorant Garamond', serif;
-          font-size: 1.4rem;
-          color: #C9A227;
+          font-size: 1.5rem;
+          color: #D4AF37;
           font-weight: 600;
+          letter-spacing: 1px;
+          text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
 
         .card-event-name {
-          font-size: 1.8rem;
-          color: #4A1428;
-          margin-bottom: 1rem;
+          font-size: 2.2rem;
+          color: #F8E58C;
+          margin-bottom: 1.2rem;
+          font-family: 'Cormorant Garamond', serif;
+          line-height: 1.2;
         }
 
         .card-info-list {
           display: flex;
           flex-direction: column;
-          gap: 0.6rem;
-          margin-bottom: 1.5rem;
-          font-size: 0.95rem;
-          color: #555;
+          gap: 1rem;
+          margin-bottom: 2rem;
+          font-size: 1rem;
+          color: #EAEAEA;
         }
 
         .card-info-item {
           display: flex;
           align-items: center;
-          gap: 0.6rem;
+          gap: 1rem;
         }
 
         .card-info-icon {
-          width: 24px;
-          height: 24px;
+          width: 32px;
+          height: 32px;
           border-radius: 50%;
-          background: rgba(201, 162, 39, 0.1);
+          background: rgba(212, 175, 55, 0.15);
           display: flex;
           align-items: center;
           justify-content: center;
-          font-size: 0.85rem;
+          font-size: 1rem;
           flex-shrink: 0;
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          color: #F8E58C;
         }
 
         .card-footer-note {
-          background: rgba(107, 30, 60, 0.03);
-          border-radius: 8px;
-          padding: 0.8rem 1rem;
-          border-left: 3px solid #C9A227;
+          background: rgba(212, 175, 55, 0.08);
+          border-radius: 10px;
+          padding: 1rem 1.2rem;
+          border-left: 4px solid #D4AF37;
           font-family: 'Cormorant Garamond', serif;
           font-style: italic;
-          font-size: 1.05rem;
-          color: #6B1E3C;
+          font-size: 1.15rem;
+          color: #F8E58C;
+          line-height: 1.5;
+          position: relative;
         }
 
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(10px); }
+        /* Entrance Animation for Cards */
+        @keyframes cardFadeIn {
+          from { opacity: 0; transform: translateY(40px); }
           to { opacity: 1; transform: translateY(0); }
         }
 
-        @media (max-width: 600px) {
+        /* 📱 Responsive Design 📱 */
+        @media (max-width: 768px) {
+          .events-section { padding: 60px 15px; }
+          .events-section .section-title { font-size: 2.4rem; }
+          
           .scratch-title { font-size: 1.8rem; }
-          .events-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-          .event-card-large { padding: 1.5rem; }
+          .scratch-subtitle { font-size: 0.9rem; }
+          
+          .events-grid { 
+            grid-template-columns: 1fr; 
+            gap: 1.8rem; 
+            margin-top: 2rem; 
+          }
+          
+          .event-card-large { 
+            padding: 1.8rem; 
+            border-radius: 16px;
+          }
+          
+          .card-event-name { font-size: 1.8rem; }
+          .card-hindi-title { font-size: 1.3rem; }
+          .card-footer-note { font-size: 1.05rem; }
         }
       `}</style>
 
@@ -575,7 +979,7 @@ function HeartScratchCard({
             <div
               key={i}
               className="event-card-large"
-              style={{ animation: `fadeIn 0.6s ease forwards ${i * 0.15}s` }}
+              style={{ animation: `cardFadeIn 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards ${i * 0.2}s` }}
             >
               <div>
                 <div className="card-top-header">
@@ -583,7 +987,7 @@ function HeartScratchCard({
                   <span className="card-hindi-title">{ev.hindi}</span>
                 </div>
 
-                <h3 className="card-event-name display-font">{ev.name}</h3>
+                <h3 className="card-event-name">{ev.name}</h3>
 
                 <div className="card-info-list">
                   <div className="card-info-item">
@@ -601,9 +1005,11 @@ function HeartScratchCard({
                 </div>
               </div>
 
-              <div className="card-footer-note">
-                "{ev.note}"
-              </div>
+              {ev.note && (
+                <div className="card-footer-note">
+                  "{ev.note}"
+                </div>
+              )}
             </div>
           ))}
         </div>
@@ -614,26 +1020,201 @@ function HeartScratchCard({
 
 function VenueSection() {
   return (
-    <section id="venue" className="section">
+    <section id="venue" className="venue-section section">
+      <style>{`
+        /* Deep Dark Maroon Theme Background */
+        .venue-section {
+          background: radial-gradient(circle at center, #3A0F1E 0%, #110309 100%);
+          padding: 100px 20px;
+          position: relative;
+          overflow: hidden;
+          color: #Fdfbf7;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        /* Ambient Glow */
+        .venue-section::before {
+          content: '';
+          position: absolute;
+          top: 20%;
+          left: 10%;
+          width: 40%;
+          height: 40%;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+          filter: blur(50px);
+          pointer-events: none;
+        }
+
+        /* Titles and Headers */
+        .venue-section .section-eyebrow {
+          color: #D4AF37; /* Metallic Gold */
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          letter-spacing: 4px;
+          text-align: center;
+          margin-bottom: 10px;
+          font-weight: 600;
+        }
+
+        .venue-section .section-title {
+          color: #F8E58C;
+          font-size: 3rem;
+          text-align: center;
+          margin-bottom: 15px;
+          font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+          text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .venue-section .section-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 15px;
+          margin-bottom: 50px;
+        }
+
+        .venue-section .line {
+          height: 1px;
+          width: 80px;
+          background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        }
+
+        /* Luxury Glassmorphism Venue Card */
+        .venue-card {
+          background: rgba(35, 10, 18, 0.6);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-radius: 20px;
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5), inset 0 0 20px rgba(212, 175, 55, 0.05);
+          padding: 3rem 2.5rem;
+          max-width: 800px;
+          width: 100%;
+          text-align: center;
+          position: relative;
+          overflow: hidden;
+          animation: fadeUp 1s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        /* Golden Top Border */
+        .venue-card::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 5px;
+          background: linear-gradient(90deg, #D4AF37, #FFF8D6, #D4AF37);
+        }
+
+        .venue-name {
+          color: #F8E58C;
+          font-size: 2.5rem;
+          font-family: 'Cormorant Garamond', serif;
+          margin-bottom: 12px;
+          letter-spacing: 1px;
+        }
+
+        .venue-address {
+          color: #EAEAEA;
+          font-size: 1.15rem;
+          line-height: 1.6;
+          margin-bottom: 2rem;
+        }
+
+        .venue-icon {
+          font-size: 2rem;
+          margin-bottom: 10px;
+          display: inline-block;
+          filter: drop-shadow(0 0 10px rgba(212,175,55,0.4));
+        }
+
+        /* Map Container */
+        .venue-map-container {
+          width: 100%;
+          height: 350px;
+          border-radius: 12px;
+          overflow: hidden;
+          border: 2px solid rgba(212, 175, 55, 0.4);
+          box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+          margin-bottom: 2rem;
+          position: relative;
+          background: #110309;
+        }
+
+        .venue-map-container iframe {
+          width: 100%;
+          height: 100%;
+          border: none;
+          filter: grayscale(20%) contrast(1.1); /* Blends slightly better with dark themes */
+          transition: filter 0.3s ease;
+        }
+        
+        .venue-map-container:hover iframe {
+          filter: grayscale(0%) contrast(1);
+        }
+
+        /* Golden Button */
+        .btn-gold {
+          background: linear-gradient(135deg, #D4AF37, #B8860B);
+          color: #110309;
+          font-weight: 700;
+          font-size: 1.1rem;
+          padding: 14px 36px;
+          border-radius: 30px;
+          text-decoration: none;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          transition: all 0.3s ease;
+          box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+          border: 1px solid #FFF8D6;
+        }
+
+        .btn-gold:hover {
+          transform: translateY(-4px);
+          box-shadow: 0 12px 25px rgba(212, 175, 55, 0.5);
+          background: linear-gradient(135deg, #E6C762, #D4AF37);
+        }
+
+        @keyframes fadeUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+          .venue-section { padding: 80px 15px; }
+          .venue-section .section-title { font-size: 2.4rem; }
+          .venue-card { padding: 2rem 1.5rem; }
+          .venue-name { font-size: 2rem; }
+          .venue-address { font-size: 1rem; }
+          .venue-map-container { height: 250px; }
+          .btn-gold { padding: 12px 28px; font-size: 1rem; }
+        }
+      `}</style>
+
       <p className="section-eyebrow">Location</p>
       <h2 className="section-title">Wedding Venue</h2>
-      <div className="section-divider"><span className="line" /> 📍 <span className="line" /></div>
+      <div className="section-divider">
+        <span className="line" /> <span style={{ fontSize: '1.2rem' }}>✨</span> <span className="line" />
+      </div>
 
-      <div style={{ display: "flex", flexDirection: "column", alignItems: "center", gap: "1.2rem" }}>
-        <div style={{ textAlign: "center" }}>
-          <h3 className="display-font" style={{ fontSize: "1.4rem", color: "var(--maroon)" }}>Devrana</h3>
-          <p style={{ color: "#666", marginTop: '4px' }}>
-            Devrana, Khatauli, Muzaffarnagar,<br />
-            Uttar Pradesh - 251201
-          </p>
-        </div>
+      <div className="venue-card">
+        <span className="venue-icon">📍</span>
+        <h3 className="venue-name">Devrana</h3>
+        <p className="venue-address">
+          Devrana, Khatauli, Muzaffarnagar,<br />
+          Uttar Pradesh - 251201
+        </p>
 
-        <div className="venue-map">
+        <div className="venue-map-container">
           <iframe
             src="https://www.google.com/maps?q=Devrana,Khatauli,Muzaffarnagar,Uttar+Pradesh&output=embed"
-            width="100%"
-            height="100%"
-            style={{ border: 0 }}
             allowFullScreen
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
@@ -645,9 +1226,9 @@ function VenueSection() {
           href="https://www.google.com/maps/search/?api=1&query=Devrana,Khatauli,Muzaffarnagar,Uttar+Pradesh"
           target="_blank"
           rel="noreferrer"
-          className="btn"
+          className="btn-gold"
         >
-          Get Directions
+          <span>Get Directions</span> <span>🗺️</span>
         </a>
       </div>
     </section>
@@ -663,14 +1244,190 @@ function GallerySection({ galleryRef, galleryVisible }) {
   ];
 
   return (
-    <section id="gallery" ref={galleryRef} className={`section reveal ${galleryVisible ? 'visible' : ''}`} style={{ background: 'rgba(107,30,60,0.03)' }}>
+    <section 
+      id="gallery" 
+      ref={galleryRef} 
+      className={`gallery-section section reveal ${galleryVisible ? 'visible' : ''}`}
+    >
+      <style>{`
+        /* Deep Dark Maroon Theme Background */
+        .gallery-section {
+          background: radial-gradient(circle at bottom right, #4A1428 0%, #110309 100%);
+          padding: 100px 20px;
+          position: relative;
+          overflow: hidden;
+        }
+
+        /* Ambient Glow */
+        .gallery-section::before {
+          content: '';
+          position: absolute;
+          bottom: 10%;
+          right: 10%;
+          width: 50%;
+          height: 50%;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.06) 0%, transparent 70%);
+          filter: blur(60px);
+          pointer-events: none;
+        }
+
+        /* Titles and Headers */
+        .gallery-section .section-eyebrow {
+          color: #D4AF37; /* Metallic Gold */
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          letter-spacing: 4px;
+          text-align: center;
+          margin-bottom: 10px;
+          font-weight: 600;
+        }
+
+        .gallery-section .section-title {
+          color: #F8E58C;
+          font-size: 3rem;
+          text-align: center;
+          margin-bottom: 15px;
+          font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+          text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .gallery-section .section-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 15px;
+          margin-bottom: 60px;
+        }
+
+        .gallery-section .line {
+          height: 1px;
+          width: 80px;
+          background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        }
+
+        .gallery-section .spin-icon {
+          font-size: 1.5rem;
+          filter: drop-shadow(0 0 5px rgba(212,175,55,0.5));
+          animation: gentleFloat 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes gentleFloat {
+          0% { transform: translateY(-3px); }
+          100% { transform: translateY(3px); }
+        }
+
+        /* Gallery Grid Layout */
+        .luxury-gallery-grid {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+          gap: 2.5rem;
+          max-width: 1200px;
+          margin: 0 auto;
+          position: relative;
+          z-index: 2;
+        }
+
+        /* Luxury Photo Cards */
+        .gallery-card {
+          background: rgba(35, 10, 18, 0.4); /* Dark glass */
+          backdrop-filter: blur(12px);
+          -webkit-backdrop-filter: blur(12px);
+          padding: 1rem;
+          border-radius: 12px;
+          border: 1px solid rgba(212, 175, 55, 0.2);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
+          position: relative;
+          transition: all 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+          opacity: 0; /* Handled by animation */
+        }
+
+        /* Card visibility trigger */
+        .reveal.visible .gallery-card {
+          animation: cardFadeUp 0.8s forwards;
+        }
+
+        .gallery-card:hover {
+          transform: translateY(-10px) scale(1.03);
+          border-color: rgba(212, 175, 55, 0.6);
+          box-shadow: 0 25px 45px rgba(0, 0, 0, 0.6), 0 0 30px rgba(212, 175, 55, 0.15);
+          background: rgba(45, 13, 23, 0.6);
+        }
+
+        /* Golden Inner Frame */
+        .gallery-image-frame {
+          position: relative;
+          border-radius: 8px;
+          overflow: hidden;
+          aspect-ratio: 4/5; /* Gives it a classic portrait photo look */
+          border: 2px solid rgba(212, 175, 55, 0.4);
+        }
+
+        .gallery-image-frame img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.8s ease;
+          filter: contrast(1.1) brightness(0.9);
+        }
+
+        .gallery-card:hover .gallery-image-frame img {
+          transform: scale(1.1);
+          filter: contrast(1.1) brightness(1.1);
+        }
+
+        /* Corner Ornaments on the Frame */
+        .frame-ornament {
+          position: absolute;
+          width: 15px;
+          height: 15px;
+          border: 2px solid #D4AF37;
+          z-index: 2;
+          pointer-events: none;
+        }
+        
+        .frame-ornament.top-left { top: 10px; left: 10px; border-right: none; border-bottom: none; }
+        .frame-ornament.top-right { top: 10px; right: 10px; border-left: none; border-bottom: none; }
+        .frame-ornament.bottom-left { bottom: 10px; left: 10px; border-right: none; border-top: none; }
+        .frame-ornament.bottom-right { bottom: 10px; right: 10px; border-left: none; border-top: none; }
+
+        @keyframes cardFadeUp {
+          0% { opacity: 0; transform: translateY(50px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .gallery-section { padding: 80px 15px; }
+          .gallery-section .section-title { font-size: 2.4rem; }
+          .luxury-gallery-grid { gap: 1.5rem; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); }
+        }
+      `}</style>
+
       <p className="section-eyebrow">Memories</p>
       <h2 className="section-title">Moments Captured</h2>
-      <div className="section-divider"><span className="line" /> <span className="spin-icon">📷</span> <span className="line" /></div>
-      <div className="gallery-grid">
+      
+      <div className="section-divider">
+        <span className="line" /> 
+        <span className="spin-icon">📷</span> 
+        <span className="line" />
+      </div>
+
+      <div className="luxury-gallery-grid">
         {images.map((img, idx) => (
-          <div key={idx} className="gallery-item">
-            <img src={img} alt={`Gallery ${idx + 1}`} />
+          <div 
+            key={idx} 
+            className="gallery-card"
+            style={{ animationDelay: `${idx * 0.2}s` }} /* Staggered entrance */
+          >
+            <div className="gallery-image-frame">
+              {/* Decorative Corner Borders */}
+              <div className="frame-ornament top-left"></div>
+              <div className="frame-ornament top-right"></div>
+              <div className="frame-ornament bottom-left"></div>
+              <div className="frame-ornament bottom-right"></div>
+              
+              <img src={img} alt={`Beautiful wedding moment ${idx + 1}`} loading="lazy" />
+            </div>
           </div>
         ))}
       </div>
@@ -680,69 +1437,485 @@ function GallerySection({ galleryRef, galleryVisible }) {
 
 function WishesSection({ wishesRef, wishesVisible, wishes, newWish, setNewWish, handleWishSubmit }) {
   return (
-    <section id="wishes" ref={wishesRef} className={`section reveal ${wishesVisible ? 'visible' : ''}`}>
+    <section 
+      id="wishes" 
+      ref={wishesRef} 
+      className={`wishes-section section reveal ${wishesVisible ? 'visible' : ''}`}
+    >
+      <style>{`
+        /* Deep Dark Maroon Theme Background */
+        .wishes-section {
+          background: radial-gradient(circle at top left, #3A0F1E 0%, #110309 100%);
+          padding: 100px 20px;
+          position: relative;
+          overflow: hidden;
+          color: #Fdfbf7;
+        }
+
+        /* Ambient Glow */
+        .wishes-section::before {
+          content: '';
+          position: absolute;
+          top: 30%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 60%;
+          height: 60%;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.05) 0%, transparent 60%);
+          filter: blur(60px);
+          pointer-events: none;
+        }
+
+        /* Titles and Headers */
+        .wishes-section .section-eyebrow {
+          color: #D4AF37; /* Metallic Gold */
+          font-size: 1.1rem;
+          text-transform: uppercase;
+          letter-spacing: 4px;
+          text-align: center;
+          margin-bottom: 10px;
+          font-weight: 600;
+        }
+
+        .wishes-section .section-title {
+          color: #F8E58C;
+          font-size: 3rem;
+          text-align: center;
+          margin-bottom: 15px;
+          font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+          text-shadow: 0 4px 15px rgba(212, 175, 55, 0.3);
+        }
+
+        .wishes-section .section-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 15px;
+          margin-bottom: 50px;
+        }
+
+        .wishes-section .line {
+          height: 1px;
+          width: 80px;
+          background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        }
+
+        .wishes-section .spin-icon {
+          font-size: 1.5rem;
+          filter: drop-shadow(0 0 5px rgba(212,175,55,0.5));
+          animation: gentleFloat 3s ease-in-out infinite alternate;
+        }
+
+        /* Glassmorphism Form Container */
+        .glass-form-container {
+          background: rgba(35, 10, 18, 0.5);
+          backdrop-filter: blur(16px);
+          -webkit-backdrop-filter: blur(16px);
+          border-radius: 20px;
+          border: 1px solid rgba(212, 175, 55, 0.3);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(212, 175, 55, 0.05);
+          padding: 3rem;
+          max-width: 600px;
+          margin: 0 auto 4rem;
+          position: relative;
+          z-index: 2;
+        }
+
+        .form-group {
+          margin-bottom: 1.5rem;
+          text-align: left;
+        }
+
+        .form-group label {
+          display: block;
+          color: #D4AF37;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 1.2rem;
+          margin-bottom: 0.5rem;
+          letter-spacing: 1px;
+        }
+
+        .luxury-input {
+          width: 100%;
+          background: rgba(0, 0, 0, 0.3);
+          border: 1px solid rgba(212, 175, 55, 0.4);
+          color: #F8E58C;
+          padding: 14px 18px;
+          border-radius: 10px;
+          font-size: 1rem;
+          font-family: inherit;
+          transition: all 0.3s ease;
+          box-sizing: border-box;
+          outline: none;
+        }
+
+        .luxury-input::placeholder {
+          color: rgba(248, 229, 140, 0.4);
+        }
+
+        .luxury-input:focus {
+          border-color: #D4AF37;
+          box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+          background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* Golden Submit Button */
+        .btn-gold-submit {
+          background: linear-gradient(135deg, #D4AF37, #B8860B);
+          color: #110309;
+          font-weight: 700;
+          font-size: 1.1rem;
+          padding: 14px;
+          border-radius: 10px;
+          border: 1px solid #FFF8D6;
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 10px;
+          cursor: pointer;
+          text-transform: uppercase;
+          letter-spacing: 1.5px;
+          transition: all 0.3s ease;
+          box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .btn-gold-submit:hover {
+          transform: translateY(-3px);
+          box-shadow: 0 12px 25px rgba(212, 175, 55, 0.5);
+          background: linear-gradient(135deg, #E6C762, #D4AF37);
+        }
+
+        .btn-gold-submit svg {
+          fill: #110309;
+          width: 20px;
+          height: 20px;
+          transition: transform 0.3s ease;
+        }
+
+        .btn-gold-submit:hover svg {
+          transform: translateX(4px) translateY(-4px);
+        }
+
+        /* Wishes Display Cards */
+        .wishes-list {
+          max-width: 700px;
+          margin: 0 auto;
+          display: flex;
+          flex-direction: column;
+          gap: 1.5rem;
+          position: relative;
+          z-index: 2;
+        }
+
+        .luxury-wish-card {
+          background: rgba(35, 10, 18, 0.4);
+          backdrop-filter: blur(10px);
+          -webkit-backdrop-filter: blur(10px);
+          border-radius: 16px;
+          border-left: 4px solid #D4AF37;
+          border-top: 1px solid rgba(212, 175, 55, 0.15);
+          border-right: 1px solid rgba(212, 175, 55, 0.15);
+          border-bottom: 1px solid rgba(212, 175, 55, 0.15);
+          padding: 1.8rem;
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+          transition: transform 0.3s ease, box-shadow 0.3s ease;
+          opacity: 0;
+        }
+
+        /* Entrance Animation for Cards */
+        .reveal.visible .luxury-wish-card {
+          animation: slideUpFade 0.6s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+        }
+
+        .luxury-wish-card:hover {
+          transform: translateX(5px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5), inset 0 0 15px rgba(212, 175, 55, 0.05);
+          border-left-color: #F8E58C;
+        }
+
+        .wish-author {
+          color: #D4AF37;
+          font-family: 'Cormorant Garamond', serif;
+          font-size: 1.4rem;
+          margin-bottom: 0.5rem;
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+
+        .wish-author svg {
+          width: 18px;
+          height: 18px;
+          fill: #D4AF37;
+        }
+
+        .wish-text {
+          font-style: italic;
+          color: #EAEAEA;
+          line-height: 1.6;
+          font-size: 1.05rem;
+        }
+
+        @keyframes slideUpFade {
+          0% { opacity: 0; transform: translateY(30px); }
+          100% { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+          .wishes-section { padding: 80px 15px; }
+          .wishes-section .section-title { font-size: 2.4rem; }
+          .glass-form-container { padding: 2rem 1.5rem; }
+          .luxury-wish-card { padding: 1.5rem; }
+        }
+      `}</style>
+
       <p className="section-eyebrow">Blessings</p>
       <h2 className="section-title">Leave Your Wishes ❤️</h2>
-      <div className="section-divider"><span className="line" /> <span className="spin-icon">🙏</span> <span className="line" /></div>
+      <div className="section-divider">
+        <span className="line" /> 
+        <span className="spin-icon">🙏</span> 
+        <span className="line" />
+      </div>
 
-      <div className="form-container" style={{ marginBottom: '3rem' }}>
+      <div className="glass-form-container">
         <form onSubmit={handleWishSubmit}>
           <div className="form-group">
             <label>Your Name</label>
             <input
               type="text"
-              className="form-input"
+              className="luxury-input"
               value={newWish.name}
               onChange={(e) => setNewWish({ ...newWish, name: e.target.value })}
               required
-              placeholder="Enter your name"
+              placeholder="Enter your beautiful name"
             />
           </div>
           <div className="form-group">
             <label>Your Message</label>
             <textarea
-              className="form-input"
-              rows="3"
+              className="luxury-input"
+              rows="4"
               value={newWish.message}
               onChange={(e) => setNewWish({ ...newWish, message: e.target.value })}
               required
-              placeholder="Write your wishes here..."
+              placeholder="Write your heartfelt wishes here..."
             />
           </div>
-          <button type="submit" className="btn" style={{ width: '100%', justifyContent: 'center' }}>
-            <svg className="svg-icon" viewBox="0 0 24 24" style={{ marginRight: '0.3rem', fill: '#fff' }}>
+          <button type="submit" className="btn-gold-submit">
+            Send Blessing
+            <svg viewBox="0 0 24 24">
               <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
             </svg>
-            Send Blessing
           </button>
         </form>
       </div>
 
-      <div style={{ maxWidth: '700px', margin: '0 auto', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+      <div className="wishes-list">
         {wishes.map((w, index) => (
-          <div key={index} className="wish-card">
-            <h4 style={{ color: 'var(--maroon)', marginBottom: '0.3rem', display: 'flex', alignItems: 'center', gap: '0.3rem' }}>
-              <svg className="svg-icon" viewBox="0 0 24 24" style={{ fill: 'var(--gold)' }}>
+          <div 
+            key={index} 
+            className="luxury-wish-card"
+            style={{ animationDelay: `${index * 0.15}s` }} /* Staggered entrance */
+          >
+            <h4 className="wish-author">
+              <svg viewBox="0 0 24 24">
                 <path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.5 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" />
               </svg>
               {w.name}
             </h4>
-            <p style={{ fontStyle: 'italic', color: '#555' }}>"{w.message}"</p>
+            <p className="wish-text">"{w.message}"</p>
           </div>
         ))}
       </div>
     </section>
   );
 }
-
 function Footer() {
   return (
-    <footer>
-      <h2 className="display-font" style={{ color: 'var(--gold-light)', fontSize: 'clamp(1.8rem, 4vw, 2.5rem)', marginBottom: '1rem' }}>Thank You</h2>
-      <p style={{ opacity: 0.85, maxWidth: '420px', margin: '0 auto 2rem auto', lineHeight: '1.7', fontFamily: "'Cormorant Garamond', serif", fontStyle: 'italic', fontSize: '1.1rem' }}>
-        Aapka aana humare liye khushi ki baat hogi. We look forward to celebrating our special day with you.
-      </p>
-      <p style={{ fontSize: '0.8rem', opacity: 0.5, letterSpacing: '1px' }}>© 2026 ROHAN & PRIYA. ALL RIGHTS RESERVED.</p>
+    <footer className="luxury-footer">
+      <style>{`
+        /* Deep Dark Maroon & Gold Theme for Footer */
+        .luxury-footer {
+          background: linear-gradient(180deg, #1A050E 0%, #0A0205 100%);
+          padding: 100px 20px 30px;
+          position: relative;
+          overflow: hidden;
+          text-align: center;
+          color: #Fdfbf7;
+          border-top: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        /* Subtle glowing background orb */
+        .luxury-footer::before {
+          content: '';
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 80%;
+          height: 80%;
+          background: radial-gradient(circle, rgba(212, 175, 55, 0.08) 0%, transparent 60%);
+          filter: blur(50px);
+          pointer-events: none;
+        }
+
+        .footer-content {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        /* 'Thank You' Eyebrow Text */
+        .footer-thank-you {
+          color: #D4AF37;
+          font-size: clamp(1.2rem, 3vw, 1.8rem);
+          text-transform: uppercase;
+          letter-spacing: 6px;
+          margin-bottom: 20px;
+          font-weight: 600;
+          animation: fadeIn 1.5s ease-in-out;
+        }
+
+        /* Decorative Divider */
+        .footer-divider {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 15px;
+          margin-bottom: 40px;
+          width: 100%;
+          max-width: 300px;
+        }
+
+        .footer-divider .line {
+          height: 1px;
+          flex-grow: 1;
+          background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+        }
+
+        .footer-divider .icon {
+          color: #F8E58C;
+          font-size: 1.2rem;
+          filter: drop-shadow(0 0 5px rgba(212,175,55,0.8));
+          animation: pulseGlow 3s infinite alternate;
+        }
+
+        /* Big Couple Names */
+        .footer-names {
+          font-family: 'Cormorant Garamond', 'Playfair Display', serif;
+          font-size: clamp(3.5rem, 10vw, 8rem); /* Massively responsive font size */
+          line-height: 1.1;
+          margin: 0 0 30px 0;
+          /* Metallic Gold Gradient Text */
+          background: linear-gradient(to bottom, #FFF8D6 20%, #D4AF37 50%, #B8860B 80%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          text-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          flex-wrap: wrap;
+          gap: clamp(10px, 3vw, 20px);
+        }
+
+        .footer-names .ampersand {
+          font-size: clamp(3rem, 8vw, 6rem);
+          font-family: 'Brush Script MT', 'Great Vibes', cursive; /* Elegant cursive for the & */
+          font-style: italic;
+          color: #D4AF37;
+          /* Reset gradient for the ampersand so it stands out slightly */
+          -webkit-text-fill-color: #E6C762;
+          background: none;
+          text-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Warm Message */
+        .footer-message {
+          color: #EAEAEA;
+          opacity: 0.9;
+          max-width: 500px;
+          margin: 0 auto 3rem auto;
+          line-height: 1.8;
+          font-family: 'Cormorant Garamond', serif;
+          font-style: italic;
+          font-size: clamp(1.1rem, 2.5vw, 1.3rem);
+          text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+        }
+
+        /* Copyright Section */
+        .footer-bottom {
+          margin-top: 40px;
+          padding-top: 30px;
+          border-top: 1px solid rgba(212, 175, 55, 0.15);
+          width: 100%;
+          max-width: 800px;
+        }
+
+        .footer-copyright {
+          font-size: 0.8rem;
+          color: #D4AF37;
+          opacity: 0.6;
+          letter-spacing: 2px;
+          text-transform: uppercase;
+        }
+
+        /* Animations */
+        @keyframes pulseGlow {
+          0% { transform: scale(0.9); opacity: 0.7; }
+          100% { transform: scale(1.1); opacity: 1; }
+        }
+
+        @keyframes fadeIn {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive Adjustments */
+        @media (max-width: 600px) {
+          .luxury-footer {
+            padding: 80px 15px 20px;
+          }
+          .footer-names {
+            flex-direction: column; /* Stacks names on very small screens for maximum impact */
+            gap: 0px;
+          }
+          .footer-names .ampersand {
+            margin: -10px 0; /* Tighten spacing when stacked */
+          }
+        }
+      `}</style>
+
+      <div className="footer-content">
+        <h3 className="footer-thank-you">Thank You</h3>
+        
+        <div className="footer-divider">
+          <span className="line" />
+          <span className="icon">✨</span>
+          <span className="line" />
+        </div>
+
+        <h1 className="footer-names">
+          <span>Rohan</span>
+          <span className="ampersand">&</span>
+          <span>Priya</span>
+        </h1>
+
+        <p className="footer-message">
+          Aapka aana humare liye khushi ki baat hogi.<br /> 
+          We look forward to celebrating our special day with you.
+        </p>
+
+        <div className="footer-bottom">
+          <p className="footer-copyright">
+            © 2026 ROHAN & PRIYA. ALL RIGHTS RESERVED.
+          </p>
+        </div>
+      </div>
     </footer>
   );
 }
@@ -791,17 +1964,17 @@ export default function WeddingInvitation() {
   ];
 
   // Floating Petals
-  const petals = useMemo(() => (
-    [...Array(14)].map((_, i) => ({
-      id: i,
-      emoji: PETAL_EMOJIS[i % PETAL_EMOJIS.length],
-      left: Math.random() * 92,
-      delay: Math.random() * 10,
-      duration: 11 + Math.random() * 8,
-      size: 1.1 + Math.random() * 0.9,
-      hue: Math.floor(Math.random() * 360)
-    }))
-  ), []);
+  // const petals = useMemo(() => (
+  //   [...Array(14)].map((_, i) => ({
+  //     id: i,
+  //     emoji: PETAL_EMOJIS[i % PETAL_EMOJIS.length],
+  //     left: Math.random() * 92,
+  //     delay: Math.random() * 10,
+  //     duration: 11 + Math.random() * 8,
+  //     size: 1.1 + Math.random() * 0.9,
+  //     hue: Math.floor(Math.random() * 360)
+  //   }))
+  // ), []);
 
   // Timer Calculation
   useEffect(() => {
@@ -1224,7 +2397,7 @@ export default function WeddingInvitation() {
       `}</style>
 
       {/* Floating Petals */}
-      {petals.map((p) => (
+      {/* {petals.map((p) => (
         <span
           key={p.id}
           className="petal"
@@ -1238,7 +2411,7 @@ export default function WeddingInvitation() {
         >
           {p.emoji}
         </span>
-      ))}
+      ))} */}
 
       {/* Confetti Explosion */}
       {showConfetti && confettiPieces.map((c) => (
@@ -1258,7 +2431,7 @@ export default function WeddingInvitation() {
       ))}
 
       {/* Navigation */}
-      <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} />
+      {/* <Navbar isMenuOpen={isMenuOpen} setIsMenuOpen={setIsMenuOpen} /> */}
 
       {/* Gate Opening Hero */}
       <GateHero gateOpen={gateOpen} setGateOpen={setGateOpen} timeLeft={timeLeft} />
