@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 
+
 export function GateHero({ gateOpen: externalGateOpen, setGateOpen: externalSetGateOpen, targetDate }) {
   const [internalGateOpen, setInternalGateOpen] = useState(false);
   const gateOpen = externalGateOpen !== undefined ? externalGateOpen : internalGateOpen;
@@ -56,7 +57,7 @@ export function GateHero({ gateOpen: externalGateOpen, setGateOpen: externalSetG
       speedX: Math.random() * 1 - 0.5,
       angle: Math.random() * 360,
       spin: Math.random() * 2 - 1,
-      color: Math.random() > 0.4 ? '#FFB300' : '#E53935', // Marigold & Rose
+      color: Math.random() > 0.4 ? '#FFB300' : '#E53935',
     }));
 
     const render = () => {
@@ -114,96 +115,65 @@ export function GateHero({ gateOpen: externalGateOpen, setGateOpen: externalSetG
         }
 
         .gold-shimmer-text {
-          background: linear-gradient(90deg, #e8c766 0%, #ffffff 50%, #e8c766 100%);
+          background: linear-gradient(90deg, #6B1E3C 0%, #C9A227 50%, #6B1E3C 100%);
           background-size: 200% auto;
           color: transparent;
           -webkit-background-clip: text;
           background-clip: text;
           animation: goldShimmer 4s linear infinite;
         }
-
-        @media (max-width: 600px) {
-          .bow-center-seal {
-            width: 110px !important;
-            height: 110px !important;
-          }
-          .seal-names { font-size: 0.85rem !important; }
-          .bow-loop {
-            width: 30px !important;
-            height: 48px !important;
-          }
-          .countdown-container { gap: 6px !important; }
-          .countdown-box {
-            padding: 8px 10px !important;
-            min-width: 52px !important;
-          }
-          .countdown-num { font-size: 1.25rem !important; }
-        }
       `}</style>
 
-      <section id="home" style={styles.hero}>
-        {/* Background Ambient Glow */}
-        <div style={styles.heroBackdrop} />
+      <section id="home" className="relative w-screen h-screen min-h-[650px] overflow-hidden flex items-center justify-center bg-[#3A0C16]">
+        {/* Background Wedding Invitation Image / Theme */}
+        <div 
+          className="absolute inset-0 bg-center bg-cover bg-no-repeat z-[1]"
+          style={{ backgroundImage: `url('/hero-bg.png')` }}
+        />
 
         {/* Dynamic Petal Shower Canvas */}
-        <canvas ref={canvasRef} style={styles.petalCanvas} />
-
-        {/* Decorative Top Arch / Hanging Garland */}
-        {/* <div style={styles.heroToran}>
-          {[...Array(16)].map((_, i) => (
-            <div key={i} style={styles.toranFlowerWrapper}>
-              <span style={{ fontSize: '1.4rem' }}>🌼</span>
-              <span style={{ fontSize: '0.9rem', marginTop: '-6px' }}>🌸</span>
-            </div>
-          ))}
-        </div> */}
+        <canvas ref={canvasRef} className="absolute inset-0 w-full h-full pointer-events-none z-[5]" />
 
         {/* 3D Gate Wrapper */}
         <div
+          className="absolute inset-0 flex z-[10]"
           style={{
-            ...styles.gateContainer,
+            perspective: '1200px',
             pointerEvents: gateOpen ? 'none' : 'auto',
           }}
         >
           {/* Left Royal Gate Door */}
           <div
+            className="absolute top-0 left-0 w-1/2 h-full bg-[linear-gradient(135deg,#4A1428_0%,#2A0813_100%)] border-r-[3px] border-[#C9A227] shadow-[inset_0_0_50px_rgba(0,0,0,0.6)] transition-transform duration-[1400ms] ease-[cubic-bezier(0.77,0,0.175,1)]"
             style={{
-              ...styles.gatePanel,
-              ...styles.gateLeft,
+              transformOrigin: 'left center',
+              backfaceVisibility: 'hidden',
               transform: gateOpen ? 'rotateY(-115deg)' : 'rotateY(0deg)',
             }}
           >
-            <div style={styles.gateArchFrame} />
-            <div style={styles.gateJaliPattern} />
-            <div style={styles.gateEmblemContainer}>
-              {/* <span style={styles.emblemIcon}>🕉️</span>
-              <div style={styles.diyaHanger}>🪔</div> */}
-            </div>
+            <div className="absolute inset-[15px] border border-[rgba(201,162,39,0.35)] pointer-events-none" />
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#C9A227_1px,transparent_1px)] bg-[size:20px_20px]" />
           </div>
 
           {/* Right Royal Gate Door */}
           <div
+            className="absolute top-0 right-0 w-1/2 h-full bg-[linear-gradient(135deg,#4A1428_0%,#2A0813_100%)] border-l-[3px] border-[#C9A227] shadow-[inset_0_0_50px_rgba(0,0,0,0.6)] transition-transform duration-[1400ms] ease-[cubic-bezier(0.77,0,0.175,1)]"
             style={{
-              ...styles.gatePanel,
-              ...styles.gateRight,
+              transformOrigin: 'right center',
+              backfaceVisibility: 'hidden',
               transform: gateOpen ? 'rotateY(115deg)' : 'rotateY(0deg)',
             }}
           >
-            <div style={styles.gateArchFrame} />
-            <div style={styles.gateJaliPattern} />
-            <div style={styles.gateEmblemContainer}>
-              {/* <span style={styles.emblemIcon}>🪔</span>
-              <div style={styles.diyaHanger}>✨</div> */}
-            </div>
+            <div className="absolute inset-[15px] border border-[rgba(201,162,39,0.35)] pointer-events-none" />
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#C9A227_1px,transparent_1px)] bg-[size:20px_20px]" />
           </div>
 
           {/* Ceremonial Silk Ribbon Overlay */}
-          <div style={styles.ribbonWrapper}>
+          <div className="absolute inset-0 flex items-center justify-center z-[15] pointer-events-none">
             {/* Left Ribbon Split */}
             <div
+              className="absolute top-1/2 left-0 w-1/2 h-[50px] -mt-[25px] bg-[linear-gradient(to_bottom,#8B0000,#4A1428,#8B0000)] shadow-[0_4px_15px_rgba(0,0,0,0.4)] border-t-2 border-b-2 border-[#C9A227] transition-all duration-[1200ms]"
               style={{
-                ...styles.ribbonBand,
-                left: 0,
                 transformOrigin: 'left center',
                 transform: gateOpen ? 'scaleX(0) rotate(-5deg)' : 'scaleX(1) rotate(0deg)',
                 opacity: gateOpen ? 0 : 1,
@@ -211,9 +181,8 @@ export function GateHero({ gateOpen: externalGateOpen, setGateOpen: externalSetG
             />
             {/* Right Ribbon Split */}
             <div
+              className="absolute top-1/2 right-0 w-1/2 h-[50px] -mt-[25px] bg-[linear-gradient(to_bottom,#8B0000,#4A1428,#8B0000)] shadow-[0_4px_15px_rgba(0,0,0,0.4)] border-t-2 border-b-2 border-[#C9A227] transition-all duration-[1200ms]"
               style={{
-                ...styles.ribbonBand,
-                right: 0,
                 transformOrigin: 'right center',
                 transform: gateOpen ? 'scaleX(0) rotate(5deg)' : 'scaleX(1) rotate(0deg)',
                 opacity: gateOpen ? 0 : 1,
@@ -233,78 +202,88 @@ export function GateHero({ gateOpen: externalGateOpen, setGateOpen: externalSetG
                   handleOpenGate();
                 }
               }}
+              className="relative pointer-events-auto cursor-pointer flex flex-col items-center z-[20] transition-all duration-800"
               style={{
-                ...styles.ribbonBowContainer,
                 transform: gateOpen ? 'scale(0) rotate(90deg)' : 'scale(1) rotate(0deg)',
                 opacity: gateOpen ? 0 : 1,
               }}
             >
-              <div style={styles.bowPulseRing} />
+              <div 
+                className="absolute inset-[-12px] rounded-full border-2 border-[#C9A227] pointer-events-none"
+                style={{ animation: 'bowGlowPulse 2.5s infinite ease-in-out' }}
+              />
 
-              <div style={styles.bowKnot}>
-                <div className="bow-loop" style={{ ...styles.bowLoop, transform: 'rotate(-38deg) translateX(8px)' }} />
+              <div className="flex items-center justify-center relative">
+                <div 
+                  className="w-[38px] h-[60px] border-[3px] border-[#C9A227] rounded-[50%_50%_50%_50%/_60%_60%_40%_40%] bg-[linear-gradient(135deg,#8B0000,#4A1428)] shadow-[0_4px_10px_rgba(0,0,0,0.3)]" 
+                  style={{ transform: 'rotate(-38deg) translateX(8px)' }} 
+                />
 
                 {/* Central Royal Medallion */}
-                <div className="bow-center-seal" style={styles.bowCenterSeal}>
-                  {/* <span style={styles.sealSubhead}>Shubh Vivah</span> */}
-                  <span className="seal-names" style={styles.sealNames}>Rohan &amp; Priya</span>
-                  {/* <div style={styles.sealDivider}>✦</div> */}
-                  {/* <span style={styles.sealCtaMini}>Untie Ribbon</span> */}
+                <div className="w-[110px] h-[110px] sm:w-[130px] sm:h-[130px] rounded-full bg-[#4A1428] border-[3px] border-[#C9A227] flex flex-col items-center justify-center shadow-[0_8px_25px_rgba(0,0,0,0.5)] z-[2] p-2 text-center">
+                  <span className="font-serif text-[0.85srem] sm:text-[0.95rem] text-[#F8E58C] font-bold">Rohan &amp; Priya</span>
                 </div>
 
-                <div className="bow-loop" style={{ ...styles.bowLoop, transform: 'rotate(38deg) translateX(-8px)' }} />
+                <div 
+                  className="w-[38px] h-[60px] border-[3px] border-[#C9A227] rounded-[50%_50%_50%_50%/_60%_60%_40%_40%] bg-[linear-gradient(135deg,#8B0000,#4A1428)] shadow-[0_4px_10px_rgba(0,0,0,0.3)]" 
+                  style={{ transform: 'rotate(38deg) translateX(-8px)' }} 
+                />
               </div>
 
               {/* Ribbon Drapes */}
-              <div style={styles.bowRibbonTails}>
-                <span style={{ ...styles.tail, transform: 'rotate(18deg)' }} />
-                <span style={{ ...styles.tail, transform: 'rotate(-18deg)' }} />
+              <div className="flex gap-4 -mt-[10px]">
+                <span className="w-[16px] h-[45px] bg-[linear-gradient(to_bottom,#8B0000,#4A1428)] border-x border-[#C9A227]" style={{ transform: 'rotate(18deg)', clipPath: 'polygon(0 0, 100% 0, 80% 100%, 20% 100%)' }} />
+                <span className="w-[16px] h-[45px] bg-[linear-gradient(to_bottom,#8B0000,#4A1428)] border-x border-[#C9A227]" style={{ transform: 'rotate(-18deg)', clipPath: 'polygon(0 0, 100% 0, 80% 100%, 20% 100%)' }} />
               </div>
 
-              <div style={styles.gateCtaPrompt}>Tap Bow to Untie Ribbon</div>
+              <div className="mt-3 font-serif italic text-[1.05rem] text-[#FFF8D6] [text-shadow:0_2px_6px_rgba(0,0,0,0.8)] whitespace-nowrap">
+                Tap Bow to Untie Ribbon
+              </div>
             </div>
           </div>
         </div>
 
-        {/* Revealed Wedding Hero Card */}
+        {/* Revealed Wedding Hero Card Centered inside the Arch Background */}
         <div
+          className="relative z-[6] flex items-center justify-center w-full h-full p-5 transition-all duration-1000 delay-300"
           style={{
-            ...styles.heroContent,
             opacity: gateOpen ? 1 : 0,
             transform: gateOpen ? 'scale(1) translateY(0)' : 'scale(0.88) translateY(30px)',
           }}
         >
-          <div style={styles.invitationCard}>
-            <h3 style={styles.heroEyebrow}>✦ SHUBH VIVAH · SAVE THE DATE ✦</h3>
-            <h1 style={styles.heroTitle}>
+          <div className="max-w-[540px] w-full p-[30px_20px] text-center flex flex-col items-center justify-center mt-5">
+            <h3 className="text-[0.8rem] tracking-[3px] uppercase text-[#6B1E3C] font-semibold mb-2">
+              ✦ SHUBH VIVAH · SAVE THE DATE ✦
+            </h3>
+            <h1 className="font-serif text-[clamp(2.2rem,5vw,3.8rem)] text-[#4A1428] mb-[10px] leading-[1.2]">
               Rohan <span className="gold-shimmer-text">&amp;</span> Priya
             </h1>
-            <p style={styles.heroSub}>
+            <p className="font-serif italic text-[1.05rem] text-[#555] mb-5 max-w-[400px]">
               Together with their families, request the honor of your presence to celebrate their wedding
             </p>
 
-            <div className="countdown-container" style={styles.countdownContainer}>
-              <div className="countdown-box" style={styles.countdownBox}>
-                <div className="countdown-num" style={styles.countdownNum}>{timeLeft.days}</div>
-                <small style={styles.countdownLabel}>Days</small>
+            <div className="flex gap-[6px] sm:gap-[10px] justify-center mb-[25px]">
+              <div className="bg-[rgba(255,249,242,0.85)] border border-[rgba(201,162,39,0.4)] p-[6px_8px] sm:p-[8px_12px] rounded-[8px] min-w-[48px] sm:min-w-[60px] shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+                <div className="font-serif text-[1.1rem] sm:text-[1.4rem] font-bold text-[#4A1428]">{timeLeft.days}</div>
+                <small className="text-[0.65rem] uppercase tracking-[1px] text-[#777] block">Days</small>
               </div>
-              <div className="countdown-box" style={styles.countdownBox}>
-                <div className="countdown-num" style={styles.countdownNum}>{timeLeft.hours}</div>
-                <small style={styles.countdownLabel}>Hours</small>
+              <div className="bg-[rgba(255,249,242,0.85)] border border-[rgba(201,162,39,0.4)] p-[6px_8px] sm:p-[8px_12px] rounded-[8px] min-w-[48px] sm:min-w-[60px] shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+                <div className="font-serif text-[1.1rem] sm:text-[1.4rem] font-bold text-[#4A1428]">{timeLeft.hours}</div>
+                <small className="text-[0.65rem] uppercase tracking-[1px] text-[#777] block">Hours</small>
               </div>
-              <div className="countdown-box" style={styles.countdownBox}>
-                <div className="countdown-num" style={styles.countdownNum}>{timeLeft.minutes}</div>
-                <small style={styles.countdownLabel}>Mins</small>
+              <div className="bg-[rgba(255,249,242,0.85)] border border-[rgba(201,162,39,0.4)] p-[6px_8px] sm:p-[8px_12px] rounded-[8px] min-w-[48px] sm:min-w-[60px] shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+                <div className="font-serif text-[1.1rem] sm:text-[1.4rem] font-bold text-[#4A1428]">{timeLeft.minutes}</div>
+                <small className="text-[0.65rem] uppercase tracking-[1px] text-[#777] block">Mins</small>
               </div>
-              <div className="countdown-box" style={styles.countdownBox}>
-                <div className="countdown-num" style={styles.countdownNum}>{timeLeft.seconds}</div>
-                <small style={styles.countdownLabel}>Secs</small>
+              <div className="bg-[rgba(255,249,242,0.85)] border border-[rgba(201,162,39,0.4)] p-[6px_8px] sm:p-[8px_12px] rounded-[8px] min-w-[48px] sm:min-w-[60px] shadow-[0_4px_10px_rgba(0,0,0,0.05)]">
+                <div className="font-serif text-[1.1rem] sm:text-[1.4rem] font-bold text-[#4A1428]">{timeLeft.seconds}</div>
+                <small className="text-[0.65rem] uppercase tracking-[1px] text-[#777] block">Secs</small>
               </div>
             </div>
 
-            <a href="#events" style={styles.btnGold}>
+            {/* <a href="#events" className="bg-[linear-gradient(135deg,#C9A227,#9A7B18)] text-[#FFF] p-[12px_28px] rounded-[30px] no-underline font-medium text-[0.95rem] shadow-[0_6px_20px_rgba(201,162,39,0.3)] transition-transform duration-300 hover:-translate-y-0.5">
               Explore Wedding Events
-            </a>
+            </a> */}
           </div>
         </div>
       </section>

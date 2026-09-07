@@ -1,4 +1,6 @@
 /* Chrome, Edge, Safari */
+
+@import "tailwindcss";
 ::-webkit-scrollbar {
   display: none;
 }
